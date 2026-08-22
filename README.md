@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Marco Quantrill — Portfolio
 
-## Getting Started
+Personal site and project portfolio. Editorial-brutalist design: oversized
+Anton display type, stark paper/ink palette with a single vermilion accent,
+hard rules, and full-bleed imagery that breaks the grid.
 
-First, run the development server:
+**Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · Motion
+
+## Develop
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Verify
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`.claude/verify.mjs` is a 33-check regression suite that drives real headless
+Chrome over CDP. It needs no npm packages — Node 22's built-in `WebSocket` and
+`fetch` do the work.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npx next start -p 3000
+node .claude/verify.mjs
+```
 
-## Learn More
+It covers fonts, metadata, project links, the lazy-loaded reel, image
+dimensions, scroll motion, keyboard focus, tap-target sizes, and horizontal
+overflow at 1440 / 390 / 320px.
 
-To learn more about Next.js, take a look at the following resources:
+`.claude/shot.mjs` captures desktop and mobile screenshots the same way.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Both hardcode the Windows Chrome path at the top — change `CHROME` if you run
+them elsewhere.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Structure
 
-## Deploy on Vercel
+```
+src/
+  app/
+    layout.tsx      fonts, metadata, JSON-LD
+    globals.css     Tailwind 4 theme + editorial type scale
+    page.tsx        section composition
+  components/       Hero · Projects · About · PhotoMarquee · Reel · Contact
+  lib/content.ts    all copy, project data, video ids, photo list
+public/images/      project screenshots, personal photos, OG card
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All copy and project data lives in `src/lib/content.ts` — edit there, not in
+the components.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Two things worth knowing
+
+**Font variables must stay on `<html>`, not `<body>`.** The `@theme` font
+stacks are `var(--font-anton)`-style references resolved on `:root`. A custom
+property that fails substitution at `:root` inherits down as an empty string
+rather than re-resolving further in the tree, so moving those classNames to
+`<body>` silently drops every webfont to a system fallback.
+
+**`@theme` is declared `static`.** Tailwind 4 tree-shakes theme variables it
+doesn't see used in class names. The font stacks are only referenced from
+custom utilities in `globals.css`, so without `static` they get pruned.
+
+`verify.mjs` guards both.
+
+## Deploy
+
+Auto-detected by Vercel — no configuration needed.
+
+```bash
+vercel
+```

@@ -1,0 +1,99 @@
+"use client";
+
+import Image from "next/image";
+import { motion } from "motion/react";
+import { projects, type Project } from "@/lib/content";
+
+function Row({ p, i }: { p: Project; i: number }) {
+  const flip = i % 2 === 1;
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className="rule py-8 sm:py-12 lg:py-16 grid gap-6 lg:grid-cols-12 lg:gap-8"
+    >
+      {/* index + title */}
+      <div
+        className={`lg:col-span-5 flex flex-col ${
+          flip ? "lg:order-2 lg:col-start-8" : "lg:order-1"
+        }`}
+      >
+        <div className="flex items-baseline gap-4">
+          <span className="type-label text-accent">{p.n}</span>
+          <span className="type-label text-ink-soft">Live</span>
+        </div>
+
+        <h3 className="type-huge mt-3">{p.title}</h3>
+
+        <p className="mt-5 max-w-md text-[0.98rem] leading-relaxed text-ink-soft">
+          {p.blurb}
+        </p>
+
+        <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-2">
+          {p.stack.map((s) => (
+            <li key={s} className="type-label border border-ink px-2.5 py-1.5">
+              {s}
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-7 flex flex-wrap gap-3">
+          <a
+            href={p.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="type-label bg-ink text-paper px-5 py-3.5 hover:bg-accent transition-colors"
+          >
+            Open app &#8599;
+          </a>
+          <a
+            href={p.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="type-label border border-ink px-5 py-3.5 hover:bg-ink hover:text-paper transition-colors"
+          >
+            Source
+          </a>
+        </div>
+      </div>
+
+      {/* screenshot */}
+      <a
+        href={p.live}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Open ${p.title} in a new tab`}
+        className={`group lg:col-span-7 block overflow-hidden bg-ink ${
+          flip ? "lg:order-1 lg:col-start-1" : "lg:order-2"
+        }`}
+      >
+        <Image
+          src={p.image}
+          alt={`${p.title} screenshot`}
+          width={p.width}
+          height={p.height}
+          sizes="(max-width: 1024px) 100vw, 58vw"
+          className="w-full h-auto transition-transform duration-700 group-hover:scale-[1.03]"
+        />
+      </a>
+    </motion.article>
+  );
+}
+
+export default function Projects() {
+  return (
+    <section id="work" className="px-4 sm:px-6 lg:px-8 pb-8">
+      <div className="rule-thick pt-3 flex items-baseline justify-between type-label">
+        <h2>Selected work</h2>
+        <span>{String(projects.length).padStart(2, "0")} projects</span>
+      </div>
+
+      {projects.map((p, i) => (
+        <Row key={p.n} p={p} i={i} />
+      ))}
+    </section>
+  );
+}
