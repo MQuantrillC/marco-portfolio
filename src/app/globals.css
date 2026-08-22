@@ -43,7 +43,7 @@
   /* Giant editorial type. Clamped so it never overflows on small screens. */
   .type-mega {
     font-family: var(--font-display);
-    font-size: clamp(3.2rem, 25vw, 21rem);
+    font-size: clamp(2.75rem, 13vw, 11rem);
     line-height: 0.82;
     letter-spacing: -0.02em;
     text-transform: uppercase;

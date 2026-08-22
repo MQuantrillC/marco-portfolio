@@ -36,18 +36,17 @@ const rise = {
 
 export default function Hero() {
   return (
-    <header className="relative min-h-[100svh] flex flex-col justify-between px-4 pt-5 pb-6 sm:px-6 lg:px-8">
+    <header className="relative min-h-[86svh] flex flex-col justify-between px-4 pt-5 pb-6 sm:px-6 lg:px-8">
       {/* top meta bar */}
       <div className="rule-thick pt-3 flex items-start justify-between gap-4 type-label">
         <span>{person.location}</span>
-        <span className="hidden sm:block">Available for work</span>
         <span className="tabular-nums">
           <LocalClock /> PET
         </span>
       </div>
 
       {/* the name */}
-      <div className="flex-1 flex flex-col justify-center py-10">
+      <div className="flex-1 flex flex-col justify-end pb-10 pt-10">
         <h1 className="type-mega">
           <span className="block overflow-hidden">
             <motion.span
@@ -77,15 +76,15 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.75, duration: 0.8 }}
-          className="mt-8 grid gap-6 sm:grid-cols-12 sm:items-end"
+          className="mt-7 flex flex-col gap-7 sm:mt-8 sm:flex-row sm:items-end sm:justify-between sm:gap-10"
         >
-          <p className="sm:col-span-7 lg:col-span-6 text-2xl leading-[1.15] sm:text-3xl lg:text-[2.6rem]">
+          <p className="max-w-2xl text-2xl leading-[1.15] sm:text-3xl lg:text-[2.5rem]">
             <span className="font-[family-name:var(--font-serif)] italic">
               {intro.lead}
             </span>
           </p>
 
-          <div className="sm:col-span-5 lg:col-span-4 lg:col-start-9 flex items-end gap-4">
+          <div className="flex items-end gap-4 shrink-0">
             <Image
               src={portrait}
               alt={person.name}
@@ -123,7 +122,6 @@ export default function Hero() {
         >
           &#8595;
         </motion.span>
-        <span>Selected work &#8212; 2025</span>
       </motion.div>
     </header>
   );

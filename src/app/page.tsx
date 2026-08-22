@@ -19,8 +19,8 @@ export default function Home() {
       <main>
         <Hero />
         <Projects />
-        <About />
         <PhotoMarquee />
+        <About />
         <Reel />
         <Contact />
       </main>
