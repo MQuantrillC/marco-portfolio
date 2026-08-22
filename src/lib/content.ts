@@ -102,10 +102,22 @@ export const projects: Project[] = [
 ];
 
 export const skills = [
-  { group: "Build", items: ["TypeScript", "Next.js", "React", "Python", "HTML/CSS"] },
-  { group: "Data", items: ["SQL", "BigQuery", "GCP", "Power BI", "Excel"] },
-  { group: "Automate", items: ["n8n", "Google Apps Script", "Salesforce", "Docker"] },
-  { group: "Analyse", items: ["Technical Analysis", "Fundamental Analysis", "Bloomberg"] },
+  {
+    group: "Build",
+    items: ["TypeScript", "Next.js", "React", "Python", "HTML/CSS"],
+  },
+  {
+    group: "Data & BI",
+    items: ["SQL", "BigQuery", "Power BI", "Excel"],
+  },
+  {
+    group: "Automate & ship",
+    items: ["n8n", "Google Apps Script", "Salesforce", "Docker", "Vercel", "GCP"],
+  },
+  {
+    group: "Markets",
+    items: ["Technical analysis", "Fundamental analysis", "Bloomberg", "TradingView"],
+  },
 ];
 
 export const videos = [
