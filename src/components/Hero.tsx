@@ -59,7 +59,7 @@ export default function Hero({ flagSrc }: { flagSrc?: string }) {
       </div>
 
       {/* the name */}
-      <div className="flex-1 flex flex-col justify-end pb-10 pt-10">
+      <div className="flex-1 flex flex-col justify-center pb-8 pt-8 sm:justify-end sm:pb-10 sm:pt-10">
         <h1 className="type-mega">
           <span className="block overflow-hidden">
             <motion.span
