@@ -5,6 +5,14 @@ import Projects from "@/components/Projects";
 import Reel from "@/components/Reel";
 import Contact from "@/components/Contact";
 import ScrollBar from "@/components/ScrollBar";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import { flagCandidates } from "@/lib/content";
+
+// Server component: pick the first flag asset that is actually on disk.
+const flagSrc = flagCandidates.find((p) =>
+  existsSync(join(process.cwd(), "public", p.replace(/^\//, "")))
+);
 
 export default function Home() {
   return (
@@ -17,7 +25,7 @@ export default function Home() {
         Skip to work
       </a>
       <main>
-        <Hero />
+        <Hero flagSrc={flagSrc} />
         <Projects />
         <PhotoMarquee />
         <About />

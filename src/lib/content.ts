@@ -138,3 +138,20 @@ export const photos = [
 ].map((n) => `/images/Personal-Photo-${n}.webp`);
 
 export const portrait = "/images/Personal-Photo-5.webp";
+
+// Personal armorial banner. Optional: page.tsx looks for the first of these
+// that actually exists in public/ at build time and passes it to the hero.
+// If none is present the flag is simply not rendered - no request, no
+// broken image. Drop a file at public/images/flag.<ext> to switch it on.
+export const flagCandidates = [
+  "/images/flag.svg",
+  "/images/flag.png",
+  "/images/flag.webp",
+  "/images/flag.jpg",
+];
+
+export const flagMeta = {
+  width: 1600,
+  height: 827,
+  alt: "Marco Quantrill's personal armorial banner",
+};
