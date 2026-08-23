@@ -191,8 +191,5 @@ export const flagCopy = {
   hintTitle: "Mi bandera personal",
   hintBody: "La diseñé yo mismo. Haz clic para verla en grande.",
   dialogTitle: "Mi bandera personal",
-  // No "press Esc" here - it means nothing on a phone, and the close
-  // button is right there. Add the meaning behind the heraldry if you like.
-  dialogBody: "Un escudo y una bandera que diseñé yo mismo.",
   close: "Cerrar",
 };

@@ -155,10 +155,6 @@ export default function Flag({ src }: { src: string }) {
                 sizes="(max-width: 896px) 92vw, 896px"
                 className="mt-5 h-auto w-full"
               />
-
-              <p className="mt-5 font-[family-name:var(--font-sans)] text-sm leading-relaxed text-ink-soft">
-                {flagCopy.dialogBody}
-              </p>
             </motion.div>
           </motion.div>
         )}
