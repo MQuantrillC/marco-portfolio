@@ -179,4 +179,20 @@ export const flagMeta = {
   width: 400,
   height: 207,
   alt: "Marco Quantrill's personal armorial banner",
+  // Full-resolution version shown when the mark is expanded.
+  large: "/images/personal-flag-large.webp",
+  largeWidth: 1600,
+  largeHeight: 827,
+};
+
+// Copy for the flag hint and its expanded view. Kept in Spanish - it is a
+// personal aside on an otherwise English page. Edit freely.
+export const flagCopy = {
+  hintTitle: "Mi bandera personal",
+  hintBody: "La diseñé yo mismo. Haz clic para verla en grande.",
+  dialogTitle: "Mi bandera personal",
+  // No "press Esc" here - it means nothing on a phone, and the close
+  // button is right there. Add the meaning behind the heraldry if you like.
+  dialogBody: "Un escudo y una bandera que diseñé yo mismo.",
+  close: "Cerrar",
 };

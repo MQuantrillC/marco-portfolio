@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { person, intro, portrait, flagMeta } from "@/lib/content";
+import { person, intro, portrait } from "@/lib/content";
+import Flag from "./Flag";
 
 function LocalClock() {
   const [time, setTime] = useState<string | null>(null);
@@ -40,17 +41,7 @@ export default function Hero({ flagSrc }: { flagSrc?: string }) {
       {/* top meta bar */}
       <div className="rule-thick pt-3 flex items-center justify-between gap-4 type-label">
         <span className="flex items-center gap-3">
-          {flagSrc && (
-            <Image
-              src={flagSrc}
-              alt={flagMeta.alt}
-              width={flagMeta.width}
-              height={flagMeta.height}
-              priority
-              unoptimized
-              className="h-9 w-auto shrink-0 sm:h-10"
-            />
-          )}
+          {flagSrc && <Flag src={flagSrc} />}
           {person.location}
         </span>
         <span className="tabular-nums">
