@@ -50,6 +50,26 @@ public/images/      project screenshots, personal photos, OG card
 All copy and project data lives in `src/lib/content.ts` — edit there, not in
 the components.
 
+## The flag asset
+
+`assets/personal-flag.svg` is the source: a 1.1MB colour auto-trace (1903
+paths, 1656 near-identical fills, no viewBox). It lives outside `public/` on
+purpose so it is never deployed - vector buys nothing for a mark shown at
+40px, and it would have been larger than every other image on the site
+combined.
+
+`.claude/rasterize-flag.mjs` renders it down to the served asset: injects a
+viewBox, rasterises via headless Chrome off a `file://` URL, flood-fills the
+tracer's background to transparent so the swallow-tail fly reads against the
+paper, and writes a 400px WebP (~27KB).
+
+```bash
+node .claude/rasterize-flag.mjs   # then re-run the PIL resize step
+```
+
+`page.tsx` picks the first of `flagCandidates` that exists on disk, so
+removing the asset simply removes the flag - no request, no broken image.
+
 ## Two things worth knowing
 
 **Font variables must stay on `<html>`, not `<body>`.** The `@theme` font

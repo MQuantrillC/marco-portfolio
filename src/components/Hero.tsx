@@ -48,7 +48,7 @@ export default function Hero({ flagSrc }: { flagSrc?: string }) {
               height={flagMeta.height}
               priority
               unoptimized
-              className="h-7 w-auto shrink-0"
+              className="h-9 w-auto shrink-0 sm:h-10"
             />
           )}
           {person.location}

@@ -121,6 +121,7 @@ export const skills = [
       "SQL",
       "PostgreSQL",
       "BigQuery",
+      "Looker Studio",
       "pandas",
       "NumPy",
       "Power BI",
@@ -169,16 +170,14 @@ export const portrait = "/images/Personal-Photo-5.webp";
 // If none is present the flag is simply not rendered - no request, no
 // broken image. Drop a file at public/images/flag.<ext> to switch it on.
 export const flagCandidates = [
-  "/images/personal-flag.svg",
+  "/images/personal-flag.webp",
   "/images/personal-flag.png",
-  "/images/flag.svg",
-  "/images/flag.png",
   "/images/flag.webp",
-  "/images/flag.jpg",
+  "/images/flag.png",
 ];
 
 export const flagMeta = {
-  width: 1600,
-  height: 827,
+  width: 400,
+  height: 207,
   alt: "Marco Quantrill's personal armorial banner",
 };
