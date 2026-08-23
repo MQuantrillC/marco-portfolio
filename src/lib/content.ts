@@ -10,7 +10,6 @@ export const person = {
   github: "https://github.com/MQuantrillC",
   linkedin: "https://www.linkedin.com/in/marco-quantrill/",
   whatsapp: "https://wa.me/51986932487",
-  url: "https://mquantrillc.github.io/",
 };
 
 // The old bio ran ~200 words. This is the same person in ~45.

@@ -84,6 +84,18 @@ custom utilities in `globals.css`, so without `static` they get pruned.
 
 `verify.mjs` guards both.
 
+## The social card
+
+`public/images/og-image.jpg` is generated, not hand-made. `.claude/make-og.mjs`
+renders it at 1200x630 through headless Chrome using the site's real webfonts,
+so the card and the page never drift apart.
+
+```bash
+node .claude/make-og.mjs
+```
+
+Re-run it after changing the name, tagline or flag.
+
 ## Deploy
 
 Auto-detected by Vercel — no configuration needed.
@@ -91,3 +103,9 @@ Auto-detected by Vercel — no configuration needed.
 ```bash
 vercel
 ```
+
+Absolute URLs for OG tags and JSON-LD come from `siteUrl` in `layout.tsx`,
+which reads `NEXT_PUBLIC_SITE_URL`, then Vercel's own
+`VERCEL_PROJECT_PRODUCTION_URL`, then falls back to localhost. Deploys are
+correct with no configuration; set `NEXT_PUBLIC_SITE_URL` in the Vercel
+dashboard once a custom domain points at the project.

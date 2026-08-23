@@ -15,8 +15,18 @@ const jb = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono-jb" });
 
 const description = `${intro.lead} ${intro.body}`;
 
+// Absolute URLs for OG/Twitter images. Vercel injects
+// VERCEL_PROJECT_PRODUCTION_URL automatically, so this is correct on a
+// preview or production deploy with no configuration. Set
+// NEXT_PUBLIC_SITE_URL once a custom domain is pointed at the project.
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://marcoquantrill.com"),
+  metadataBase: new URL(siteUrl),
   title: `${person.name} — ${person.role}`,
   description,
   authors: [{ name: person.name }],
@@ -53,6 +63,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: person.name,
+  url: siteUrl,
+  image: `${siteUrl}/images/og-image.jpg`,
   jobTitle: person.role,
   email: `mailto:${person.email}`,
   telephone: person.phone,
