@@ -104,11 +104,29 @@ export const projects: Project[] = [
 export const skills = [
   {
     group: "Build",
-    items: ["TypeScript", "Next.js", "React", "Python", "HTML/CSS"],
+    items: [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "Python",
+      "Streamlit",
+      "Prisma",
+      "REST APIs",
+      "HTML/CSS",
+    ],
   },
   {
     group: "Data & BI",
-    items: ["SQL", "BigQuery", "Power BI", "Excel"],
+    items: [
+      "SQL",
+      "PostgreSQL",
+      "BigQuery",
+      "pandas",
+      "NumPy",
+      "Power BI",
+      "Excel",
+      "Google Sheets",
+    ],
   },
   {
     group: "Automate & ship",
@@ -116,7 +134,14 @@ export const skills = [
   },
   {
     group: "Markets",
-    items: ["Technical analysis", "Fundamental analysis", "Bloomberg", "TradingView"],
+    items: [
+      "Technical analysis",
+      "Fundamental analysis",
+      "Portfolio theory",
+      "Bloomberg",
+      "TradingView",
+      "Yahoo Finance",
+    ],
   },
 ];
 
@@ -144,6 +169,8 @@ export const portrait = "/images/Personal-Photo-5.webp";
 // If none is present the flag is simply not rendered - no request, no
 // broken image. Drop a file at public/images/flag.<ext> to switch it on.
 export const flagCandidates = [
+  "/images/personal-flag.svg",
+  "/images/personal-flag.png",
   "/images/flag.svg",
   "/images/flag.png",
   "/images/flag.webp",
