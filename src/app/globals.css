@@ -49,6 +49,16 @@
     text-transform: uppercase;
   }
 
+  /* Sign-off type. Same face as .type-mega, deliberately smaller - an
+     arbitrary text-[] utility loses to .type-mega on source order. */
+  .type-sign {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 7.5vw, 6.25rem);
+    line-height: 0.86;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
   .type-huge {
     font-family: var(--font-display);
     font-size: clamp(1.85rem, 4.5vw, 4.05rem);

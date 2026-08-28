@@ -14,7 +14,7 @@ export default function Contact() {
 
       <a
         href={`mailto:${person.email}`}
-        className="group block mt-10 type-mega break-words hover:text-accent transition-colors"
+        className="group block mt-10 type-sign break-words hover:text-accent transition-colors"
       >
         Say
         <br />
