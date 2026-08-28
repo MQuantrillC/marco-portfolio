@@ -8,7 +8,6 @@ export default function About() {
     <section id="about" className="bg-ink text-paper px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
       <div className="pt-3 type-label border-t-[5px] border-paper flex justify-between">
         <h2>About</h2>
-        <span>001</span>
       </div>
 
       <motion.p

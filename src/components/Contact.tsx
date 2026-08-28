@@ -10,10 +10,7 @@ const links = [
 export default function Contact() {
   return (
     <footer id="contact" className="px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
-      <div className="rule-thick pt-3 flex justify-between type-label">
-        <h2>Get in touch</h2>
-        <span>{person.location}</span>
-      </div>
+      <h2 className="sr-only">Get in touch</h2>
 
       <a
         href={`mailto:${person.email}`}

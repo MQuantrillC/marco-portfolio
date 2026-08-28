@@ -37,7 +37,7 @@ const rise = {
 
 export default function Hero({ flagSrc }: { flagSrc?: string }) {
   return (
-    <header className="relative min-h-[86svh] flex flex-col justify-between px-4 pt-5 pb-6 sm:px-6 lg:px-8">
+    <header className="relative min-h-[68svh] sm:min-h-[86svh] flex flex-col justify-between px-4 pt-5 pb-6 sm:px-6 lg:px-8">
       {/* top meta bar */}
       <div className="rule-thick pt-3 flex items-center justify-between gap-4 type-label">
         <span className="flex items-center gap-3">
@@ -111,22 +111,6 @@ export default function Hero({ flagSrc }: { flagSrc?: string }) {
         </motion.div>
       </div>
 
-      {/* scroll cue */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.1, duration: 0.6 }}
-        className="rule pt-3 flex items-center justify-between type-label"
-      >
-        <span>Scroll</span>
-        <motion.span
-          aria-hidden
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        >
-          &#8595;
-        </motion.span>
-      </motion.div>
     </header>
   );
 }

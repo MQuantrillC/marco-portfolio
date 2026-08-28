@@ -21,12 +21,7 @@ function Row({ p, i }: { p: Project; i: number }) {
           flip ? "lg:order-2 lg:col-start-8" : "lg:order-1"
         }`}
       >
-        <div className="flex items-baseline gap-4">
-          <span className="type-label text-accent">{p.n}</span>
-          <span className="type-label text-ink-soft">Live</span>
-        </div>
-
-        <h3 className="type-huge mt-3">{p.title}</h3>
+        <h3 className="type-huge">{p.title}</h3>
 
         <p className="mt-5 max-w-md text-[0.98rem] leading-relaxed text-ink-soft">
           {p.blurb}
@@ -86,10 +81,7 @@ function Row({ p, i }: { p: Project; i: number }) {
 export default function Projects() {
   return (
     <section id="work" className="px-4 sm:px-6 lg:px-8 pb-8">
-      <div className="rule-thick pt-3 flex items-baseline justify-between type-label">
-        <h2>Selected work</h2>
-        <span>{String(projects.length).padStart(2, "0")} projects</span>
-      </div>
+      <h2 className="sr-only">Selected work</h2>
 
       {projects.map((p, i) => (
         <Row key={p.n} p={p} i={i} />
