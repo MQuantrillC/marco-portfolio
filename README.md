@@ -15,21 +15,24 @@ npm run dev
 
 ## Verify
 
-`.claude/verify.mjs` is a 33-check regression suite that drives real headless
+`.claude/verify.mjs` is a 36-check regression suite that drives real headless
 Chrome over CDP. It needs no npm packages — Node 22's built-in `WebSocket` and
 `fetch` do the work.
 
 ```bash
 npm run build
 npx next start -p 3000
-node .claude/verify.mjs
+node .claude/verify.mjs http://localhost:3000/en
+node .claude/verify.mjs http://localhost:3000/es
 ```
 
 It covers fonts, metadata, project links, the lazy-loaded reel, image
 dimensions, scroll motion, keyboard focus, tap-target sizes, and horizontal
-overflow at 1440 / 390 / 320px.
+overflow at 1440 / 390 / 320px. Every selector in it is language-agnostic on
+purpose, so the same suite runs against either locale unchanged.
 
-`.claude/shot.mjs` captures desktop and mobile screenshots the same way.
+`.claude/shot.mjs [outDir] [url]` captures desktop and mobile screenshots the
+same way.
 
 Both hardcode the Windows Chrome path at the top — change `CHROME` if you run
 them elsewhere.
@@ -39,16 +42,40 @@ them elsewhere.
 ```
 src/
   app/
-    layout.tsx      fonts, metadata, JSON-LD
+    [lang]/
+      layout.tsx    fonts, per-locale metadata, hreflang, JSON-LD
+      page.tsx      section composition, loads the dictionary
     globals.css     Tailwind 4 theme + editorial type scale
-    page.tsx        section composition
   components/       Hero · Projects · About · PhotoMarquee · Reel · Contact
-  lib/content.ts    all copy, project data, video ids, photo list
+  lib/
+    content.ts      names, links, project data, video ids, photo list
+    i18n/           config.ts, en.ts, es.ts
+  proxy.ts          sends / to a locale based on Accept-Language
 public/images/      project screenshots, personal photos, OG card
 ```
 
-All copy and project data lives in `src/lib/content.ts` — edit there, not in
-the components.
+Anything that reads the same in both languages, meaning names, links,
+dimensions and product names, lives in `src/lib/content.ts`. Every sentence
+lives in `src/lib/i18n/en.ts` and `es.ts`, keyed back to the ids used in
+`content.ts`. Edit those two places, not the components.
+
+## Languages
+
+The site is published once per locale at `/en` and `/es`, both prerendered at
+build time. `src/proxy.ts` reads `Accept-Language` and sends `/` to whichever
+one fits, defaulting to English, so every link already in the wild keeps
+working.
+
+The switch in the hero meta bar is a plain link to the other locale rather
+than a toggle. There is no client state, no stored preference and no extra
+JavaScript. The two pages are separate static documents, each with its own
+`<html lang>`, canonical URL and hreflang set, which is what makes the Spanish
+version findable in search rather than merely reachable.
+
+Adding a third language means listing it in `locales` in
+`src/lib/i18n/config.ts`, writing its dictionary, and adding it to `LOCALES` in
+`src/proxy.ts`. The `Dictionary` type turns a missing key into a build error
+rather than a blank space on the page.
 
 ## The flag asset
 
@@ -67,7 +94,7 @@ paper, and writes a 400px WebP (~27KB).
 node .claude/rasterize-flag.mjs   # then re-run the PIL resize step
 ```
 
-`page.tsx` picks the first of `flagCandidates` that exists on disk, so
+`[lang]/page.tsx` picks the first of `flagCandidates` that exists on disk, so
 removing the asset simply removes the flag - no request, no broken image.
 
 ## Two things worth knowing

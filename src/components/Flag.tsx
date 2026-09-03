@@ -3,13 +3,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
-import { flagMeta, flagCopy } from "@/lib/content";
+import { flagMeta } from "@/lib/content";
+import type { Dictionary } from "@/lib/i18n/config";
 
 const FIRST_HINT_AFTER = 7000;   // let the hero land before nudging
 const HINT_VISIBLE_FOR = 6500;
 const HINT_REPEAT_EVERY = 34000;
 
-export default function Flag({ src }: { src: string }) {
+export default function Flag({ src, t }: { src: string; t: Dictionary["flag"] }) {
   const [hint, setHint] = useState(false);
   const [open, setOpen] = useState(false);
   const [done, setDone] = useState(false); // stop nudging once acknowledged
@@ -64,13 +65,13 @@ export default function Flag({ src }: { src: string }) {
           setHint(false);
           setDone(true);
         }}
-        aria-label={`${flagCopy.hintTitle}. ${flagCopy.hintBody}`}
+        aria-label={`${t.hintTitle}. ${t.hintBody}`}
         className="-my-1 flex min-h-11 cursor-pointer items-center py-1
                    transition-transform duration-300 hover:scale-105"
       >
         <Image
           src={src}
-          alt={flagMeta.alt}
+          alt={t.alt}
           width={flagMeta.width}
           height={flagMeta.height}
           priority
@@ -91,9 +92,9 @@ export default function Flag({ src }: { src: string }) {
                        border border-ink bg-paper px-3.5 py-3 shadow-[6px_6px_0_0_var(--color-ink)]
                        normal-case tracking-normal"
           >
-            <span className="type-label block text-accent">{flagCopy.hintTitle}</span>
+            <span className="type-label block text-accent">{t.hintTitle}</span>
             <span className="mt-1.5 block font-[family-name:var(--font-sans)] text-[0.8rem] leading-snug text-ink-soft">
-              {flagCopy.hintBody}
+              {t.hintBody}
             </span>
             <button
               type="button"
@@ -104,7 +105,7 @@ export default function Flag({ src }: { src: string }) {
               className="type-label -mb-2 -ml-2 mt-1 inline-flex min-h-11 items-center px-2 pb-2 pt-1
                          text-ink underline underline-offset-2 hover:text-accent"
             >
-              {flagCopy.close}
+              {t.close}
             </button>
           </motion.span>
         )}
@@ -135,7 +136,7 @@ export default function Flag({ src }: { src: string }) {
             >
               <div className="flex items-start justify-between gap-4 border-b-2 border-ink pb-3">
                 <h2 id="flag-dialog-title" className="type-label text-accent">
-                  {flagCopy.dialogTitle}
+                  {t.dialogTitle}
                 </h2>
                 <button
                   ref={closeRef}
@@ -143,13 +144,13 @@ export default function Flag({ src }: { src: string }) {
                   onClick={close}
                   className="type-label -m-2 shrink-0 p-2 text-ink hover:text-accent"
                 >
-                  {flagCopy.close} &#10005;
+                  {t.close} &#10005;
                 </button>
               </div>
 
               <Image
                 src={flagMeta.large}
-                alt={flagMeta.alt}
+                alt={t.alt}
                 width={flagMeta.largeWidth}
                 height={flagMeta.largeHeight}
                 sizes="(max-width: 896px) 92vw, 896px"

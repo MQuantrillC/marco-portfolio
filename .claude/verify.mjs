@@ -7,7 +7,13 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-const URL_ = process.argv[2] || 'http://localhost:3000/';
+const URL_ = process.argv[2] || 'http://localhost:3000/en';
+// The page is now published once per locale. Every selector below stays
+// language-agnostic on purpose, so this same suite runs unchanged against
+// /en and /es. These three are the only facts that differ between them.
+const LOCALE = new URL(URL_).pathname.split('/')[1] === 'es' ? 'es' : 'en';
+const HTML_LANG = LOCALE === 'es' ? 'es-PE' : 'en';
+const OTHER = LOCALE === 'es' ? 'en' : 'es';
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const PORT = 9337;
 const profile = mkdtempSync(join(tmpdir(), 'verify-'));
@@ -92,12 +98,19 @@ try {
 
   // --- document ---
   check('title is set', (await ev('document.title')).includes('Marco Quantrill'));
-  check('html lang="en"', (await ev('document.documentElement.lang')) === 'en');
+  check(`html lang="${HTML_LANG}"`, (await ev('document.documentElement.lang')) === HTML_LANG,
+    await ev('document.documentElement.lang'));
   check('exactly one h1', (await ev(`document.querySelectorAll('h1').length`)) === 1);
   check('JSON-LD parses as Person',
     (await ev(`JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent)['@type']`)) === 'Person');
   check('og:image is a jpg',
     (await ev(`document.querySelector('meta[property="og:image"]').content`)).endsWith('.jpg'));
+
+  check('language switch points at the other locale',
+    (await ev(`document.querySelector('header a[hreflang]')?.getAttribute('href')`)) === `/${OTHER}`,
+    await ev(`document.querySelector('header a[hreflang]')?.getAttribute('href')`));
+  check('hreflang alternates cover both locales plus x-default',
+    (await ev(`document.querySelectorAll('link[rel="alternate"][hreflang]').length`)) === 3);
 
   // --- fonts (regression guard: @theme vars must resolve on :root) ---
   check('display font resolves to Anton',
@@ -122,14 +135,14 @@ try {
     'count=' + await ev(`document.querySelectorAll('a[target="_blank"]').length`));
   check('no dead links (href empty or #)',
     await ev(`[...document.querySelectorAll('a')].every(a=>{const h=a.getAttribute('href');return h&&h!=='#'})`));
-  check('9 reel cards', (await ev(`document.querySelectorAll('#reel button[aria-label^="Play"]').length`)) === 9);
+  check('9 reel cards', (await ev(`document.querySelectorAll('#reel button[aria-label]').length`)) === 9);
   check('photo marquee has both tracks duplicated for seamless loop',
-    (await ev(`document.querySelectorAll('section[aria-label="Photography"] img').length`)) === 32);
+    (await ev(`document.querySelectorAll('section[aria-label] img').length`)) === 32);
   check('no iframes before interaction (lazy)',
     (await ev(`document.querySelectorAll('iframe').length`)) === 0);
 
   // clicking a reel card swaps the poster for the real embed
-  await ev(`document.querySelector('#reel button[aria-label^="Play"]').click()`);
+  await ev(`document.querySelector('#reel button[aria-label]').click()`);
   await sleep(1200);
   check('reel card loads iframe on click',
     (await ev(`document.querySelectorAll('#reel iframe').length`)) === 1);
@@ -168,7 +181,7 @@ try {
   check('reel play buttons have accessible names',
     await ev(`[...document.querySelectorAll('#reel button')].every(b=>(b.getAttribute('aria-label')||'').length>3)`));
   check('decorative marquee photos have empty alt',
-    await ev(`[...document.querySelectorAll('section[aria-label="Photography"] img')].every(i=>i.getAttribute('alt')==='')`));
+    await ev(`[...document.querySelectorAll('section[aria-label] img')].every(i=>i.getAttribute('alt')==='')`));
 
   // --- mobile ---
   for (const [w, h, label] of [[390, 844, '390'], [320, 700, '320']]) {

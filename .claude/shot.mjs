@@ -1,5 +1,5 @@
 // Capture desktop + mobile screenshots via headless Chrome (CDP).
-// Run: node .claude/shot.mjs
+// Run: node .claude/shot.mjs [outDir] [url]
 import { spawn } from 'node:child_process';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -9,6 +9,8 @@ const CHROME = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const PORT = 9335;
 const profile = mkdtempSync(join(tmpdir(), 'shot-'));
 const out = process.argv[2] || '.claude';
+// The page is published per locale now, so the URL has to be said out loud.
+const URL_ = process.argv[3] || 'http://localhost:3000/en';
 
 const chrome = spawn(CHROME, [
   '--headless=new', `--remote-debugging-port=${PORT}`, `--user-data-dir=${profile}`,
@@ -52,7 +54,7 @@ await send('Page.enable');
 
 await send('Emulation.setDeviceMetricsOverride',
   { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
-await send('Page.navigate', { url: 'http://localhost:3000/' });
+await send('Page.navigate', { url: URL_ });
 await sleep(5000);
 await sleep(1500);
 await shot(join(out, 'a-hero.png'));
@@ -64,7 +66,7 @@ for (const [name, sel] of [['b-work','#work'],['c-about','#about'],['d-reel','#r
 
 await send('Emulation.setDeviceMetricsOverride',
   { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-await send('Page.navigate', { url: 'http://localhost:3000/' });
+await send('Page.navigate', { url: URL_ });
 await sleep(4500);
 await sleep(1500);
 await shot(join(out, 'm-hero.png'));

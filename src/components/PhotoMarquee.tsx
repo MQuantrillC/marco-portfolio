@@ -28,10 +28,10 @@ function Track({ reverse, half }: { reverse?: boolean; half: string[] }) {
   );
 }
 
-export default function PhotoMarquee() {
+export default function PhotoMarquee({ label }: { label: string }) {
   const mid = Math.ceil(photos.length / 2);
   return (
-    <section aria-label="Photography" className="bg-ink py-2 sm:py-3 space-y-2 sm:space-y-3">
+    <section aria-label={label} className="bg-ink py-2 sm:py-3 space-y-2 sm:space-y-3">
       <Track half={photos.slice(0, mid)} />
       <Track half={photos.slice(mid)} reverse />
     </section>

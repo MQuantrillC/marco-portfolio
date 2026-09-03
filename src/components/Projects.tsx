@@ -3,9 +3,13 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import { projects, type Project } from "@/lib/content";
+import type { Dictionary } from "@/lib/i18n/config";
 
-function Row({ p, i }: { p: Project; i: number }) {
+type Copy = Dictionary["projects"];
+
+function Row({ p, i, t }: { p: Project; i: number; t: Copy }) {
   const flip = i % 2 === 1;
+  const item = t.items[p.n];
 
   return (
     <motion.article
@@ -24,7 +28,7 @@ function Row({ p, i }: { p: Project; i: number }) {
         <h3 className="type-huge">{p.title}</h3>
 
         <p className="mt-5 max-w-md text-[0.98rem] leading-relaxed text-ink-soft">
-          {p.blurb}
+          {item.blurb}
         </p>
 
         <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-2">
@@ -42,7 +46,7 @@ function Row({ p, i }: { p: Project; i: number }) {
             rel="noopener noreferrer"
             className="type-label bg-ink text-paper px-5 py-3.5 hover:bg-accent transition-colors"
           >
-            {p.liveLabel ?? "Open app"} &#8599;
+            {item.liveLabel ?? t.open} &#8599;
           </a>
           {p.repo && (
             <a
@@ -51,7 +55,7 @@ function Row({ p, i }: { p: Project; i: number }) {
               rel="noopener noreferrer"
               className="type-label border border-ink px-5 py-3.5 hover:bg-ink hover:text-paper transition-colors"
             >
-              Source
+              {t.source}
             </a>
           )}
         </div>
@@ -62,14 +66,14 @@ function Row({ p, i }: { p: Project; i: number }) {
         href={p.live}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Open ${p.title} in a new tab`}
+        aria-label={t.openIn.replace("{title}", p.title)}
         className={`group lg:col-span-7 block overflow-hidden bg-ink ${
           flip ? "lg:order-1 lg:col-start-1" : "lg:order-2"
         }`}
       >
         <Image
           src={p.image}
-          alt={`${p.title} screenshot`}
+          alt={t.screenshot.replace("{title}", p.title)}
           width={p.width}
           height={p.height}
           sizes="(max-width: 1024px) 100vw, 58vw"
@@ -80,13 +84,13 @@ function Row({ p, i }: { p: Project; i: number }) {
   );
 }
 
-export default function Projects() {
+export default function Projects({ t }: { t: Copy }) {
   return (
     <section id="work" className="px-4 sm:px-6 lg:px-8 pb-8">
-      <h2 className="sr-only">Selected work</h2>
+      <h2 className="sr-only">{t.heading}</h2>
 
       {projects.map((p, i) => (
-        <Row key={p.n} p={p} i={i} />
+        <Row key={p.n} p={p} i={i} t={t} />
       ))}
     </section>
   );

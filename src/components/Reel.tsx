@@ -3,16 +3,20 @@
 import { useState } from "react";
 import Image from "next/image";
 import { videos } from "@/lib/content";
+import type { Dictionary } from "@/lib/i18n/config";
 
-function Card({ id, i }: { id: string; i: number }) {
+type Copy = Dictionary["reel"];
+
+function Card({ id, i, t }: { id: string; i: number; t: Copy }) {
   const [playing, setPlaying] = useState(false);
+  const n = String(i + 1);
 
   return (
     <div className="relative shrink-0 w-[62vw] xs:w-[46vw] sm:w-[38vw] lg:w-[22vw] aspect-[9/16] bg-ink overflow-hidden snap-center">
       {playing ? (
         <iframe
           src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&playsinline=1`}
-          title={`Drone reel ${i + 1}`}
+          title={t.title.replace("{n}", n)}
           allow="autoplay; encrypted-media; picture-in-picture"
           allowFullScreen
           className="absolute inset-0 w-full h-full"
@@ -21,7 +25,7 @@ function Card({ id, i }: { id: string; i: number }) {
         <button
           type="button"
           onClick={() => setPlaying(true)}
-          aria-label={`Play drone reel ${i + 1}`}
+          aria-label={t.play.replace("{n}", n)}
           className="group absolute inset-0 w-full h-full cursor-pointer"
         >
           <Image
@@ -40,7 +44,7 @@ function Card({ id, i }: { id: string; i: number }) {
             </span>
           </span>
           <span className="absolute left-3 bottom-3 type-label text-paper/80">
-            {String(i + 1).padStart(2, "0")}
+            {n.padStart(2, "0")}
           </span>
         </button>
       )}
@@ -48,25 +52,25 @@ function Card({ id, i }: { id: string; i: number }) {
   );
 }
 
-export default function Reel() {
+export default function Reel({ t }: { t: Copy }) {
   return (
     <section id="reel" className="bg-ink text-paper px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
       <div className="pt-3 type-label border-t-[5px] border-paper flex justify-between">
-        <h2>The reel</h2>
-        <span>DJI Mini 4 Pro &#183; Insta360 X4</span>
+        <h2>{t.heading}</h2>
+        <span>{t.gear}</span>
       </div>
 
       <p className="mt-8 max-w-2xl font-[family-name:var(--font-serif)] italic text-xl sm:text-2xl text-paper/70">
-        Places worth the altitude.
+        {t.tagline}
       </p>
 
       <div className="mt-10 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 flex gap-3 overflow-x-auto snap-x snap-mandatory pb-4">
         {videos.map((id, i) => (
-          <Card key={id} id={id} i={i} />
+          <Card key={id} id={id} i={i} t={t} />
         ))}
       </div>
 
-      <p className="type-label text-paper/40 mt-1">Drag or swipe &#8594;</p>
+      <p className="type-label text-paper/40 mt-1">{t.drag}</p>
     </section>
   );
 }

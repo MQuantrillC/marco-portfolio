@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { person, intro, portrait } from "@/lib/content";
+import { person, portrait } from "@/lib/content";
+import { otherLocale, type Dictionary, type Locale } from "@/lib/i18n/config";
 import Flag from "./Flag";
 
 function LocalClock() {
@@ -27,6 +28,25 @@ function LocalClock() {
   return <span suppressHydrationWarning>{time ?? "--:--"}</span>;
 }
 
+// A plain anchor, not a Link: the two locales have different root layouts, so
+// the router hard-navigates between them anyway. The outer box is 44px for the
+// tap target and pulled back to 36px so the meta bar keeps the flag's height.
+function LocaleSwitch({ lang, t }: { lang: Locale; t: Dictionary["switch"] }) {
+  const other = otherLocale(lang);
+  return (
+    <a
+      href={`/${other}`}
+      hrefLang={other}
+      title={t.title}
+      className="group -my-1 inline-flex min-h-11 items-center py-1"
+    >
+      <span className="border-b-2 border-accent text-ink transition-colors group-hover:bg-accent group-hover:text-paper">
+        {t.label}
+      </span>
+    </a>
+  );
+}
+
 const rise = {
   hidden: { y: "110%" },
   show: (i: number) => ({
@@ -35,17 +55,34 @@ const rise = {
   }),
 };
 
-export default function Hero({ flagSrc }: { flagSrc?: string }) {
+export default function Hero({
+  flagSrc,
+  lang,
+  role,
+  lead,
+  flag,
+  t,
+}: {
+  flagSrc?: string;
+  lang: Locale;
+  role: string;
+  lead: string;
+  flag: Dictionary["flag"];
+  t: Dictionary["switch"];
+}) {
   return (
     <header className="relative min-h-[68svh] sm:min-h-[86svh] flex flex-col justify-between px-4 pt-5 pb-6 sm:px-6 lg:px-8">
       {/* top meta bar */}
       <div className="rule-thick pt-3 flex items-center justify-between gap-4 type-label">
         <span className="flex items-center gap-3">
-          {flagSrc && <Flag src={flagSrc} />}
+          {flagSrc && <Flag src={flagSrc} t={flag} />}
           {person.location}
         </span>
-        <span className="tabular-nums">
-          <LocalClock /> PET
+        <span className="flex items-center gap-3">
+          <LocaleSwitch lang={lang} t={t} />
+          <span className="tabular-nums">
+            <LocalClock /> PET
+          </span>
         </span>
       </div>
 
@@ -84,7 +121,7 @@ export default function Hero({ flagSrc }: { flagSrc?: string }) {
         >
           <p className="max-w-2xl text-2xl leading-[1.15] sm:text-3xl lg:text-[2.5rem]">
             <span className="font-[family-name:var(--font-serif)] italic">
-              {intro.lead}
+              {lead}
             </span>
           </p>
 
@@ -98,7 +135,7 @@ export default function Hero({ flagSrc }: { flagSrc?: string }) {
               className="w-20 h-20 sm:w-24 sm:h-24 object-cover shrink-0 grayscale"
             />
             <p className="type-label leading-relaxed text-ink-soft">
-              {person.role}
+              {role}
               <br />
               <a
                 href={`mailto:${person.email}`}
