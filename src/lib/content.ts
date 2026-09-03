@@ -15,12 +15,12 @@ export const person = {
 // The old bio ran ~200 words. This is the same person in ~45.
 export const intro = {
   lead: "I build tools that turn data into decisions.",
-  body: "Finance and international business by training, developer by practice. I work end to end — Python and SQL underneath, Next.js and TypeScript on top — and I care most about the moment a messy spreadsheet becomes something someone can actually act on.",
+  body: "Finance and international business by training, developer by practice. I work end to end: Python and SQL underneath, Next.js and TypeScript on top. What I care about most is the moment a messy spreadsheet becomes something someone can actually act on.",
   aside: "Off the clock: snowboarding, surfing, hiking, and flying a drone over places that deserve it.",
 };
 
 export const stats = [
-  { value: 5, label: "Shipped projects", suffix: "" },
+  { value: 6, label: "Shipped projects", suffix: "" },
   { value: 2, label: "Languages, fluent", suffix: "" },
   { value: 15.6, label: "GPA / 20, upper fifth", suffix: "", decimals: 1 },
 ];
@@ -31,7 +31,10 @@ export type Project = {
   blurb: string;
   stack: string[];
   live: string;
-  repo: string;
+  // Optional: Rifthold ships as a build, with no public source repo.
+  repo?: string;
+  // Overrides the "Open app" call to action. Set it for anything that is not a web app.
+  liveLabel?: string;
   image: string;
   width: number;
   height: number;
@@ -42,7 +45,7 @@ export const projects: Project[] = [
     n: "01",
     title: "Personal Finance Tracker",
     blurb:
-      "Reads Peruvian bank notification emails — BCP, Yape, BBVA, Interbank — through a self-installing Gmail script, then categorises, budgets and splits the spend automatically. Multi-user, Google sign-in, Postgres behind it.",
+      "Reads Peruvian bank notification emails from BCP, Yape, BBVA and Interbank through a self-installing Gmail script, then categorises, budgets and splits the spend automatically. Multi-user, Google sign-in, Postgres behind it.",
     stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
     live: "https://personal-finance-tracker-kohl-three.vercel.app/",
     repo: "https://github.com/MQuantrillC/personal-finance-tracker",
@@ -66,7 +69,7 @@ export const projects: Project[] = [
     n: "03",
     title: "Country Profile Comparator",
     blurb:
-      "Puts economies side by side — indicators, demographics, trade and safety metrics — pulled live from official sources so the comparison is never stale.",
+      "Puts economies side by side on indicators, demographics, trade and safety metrics, pulled live from official sources so the comparison is never stale.",
     stack: ["Next.js", "React", "REST APIs"],
     live: "https://country-profile-three.vercel.app/",
     repo: "https://github.com/MQuantrillC/Country-Profile",
@@ -97,6 +100,18 @@ export const projects: Project[] = [
     image: "/images/My-Projects-4.webp",
     width: 1400,
     height: 628,
+  },
+  {
+    n: "06",
+    title: "Rifthold",
+    blurb:
+      "Hold a lone outpost in the deep desert against escalating raider assaults, building walls, towers and collectors between waves, then fighting on the ground yourself as the Commander. Every unit, effect and sound is generated in code: no image files, no audio files, just draw calls and synthesised waveforms.",
+    stack: ["Godot 4", "GDScript", "A* Pathfinding", "WebAssembly"],
+    live: "https://mquantrillc.itch.io/rifthold",
+    liveLabel: "Play in browser",
+    image: "/images/My-Projects-7.webp",
+    width: 1400,
+    height: 788,
   },
 ];
 

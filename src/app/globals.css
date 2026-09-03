@@ -82,7 +82,7 @@
     border-top: 5px solid var(--color-ink);
   }
 
-  /* Paper grain — keeps the flat palette from feeling sterile. */
+  /* Paper grain. Keeps the flat palette from feeling sterile. */
   .grain::after {
     content: "";
     position: fixed;

@@ -112,9 +112,11 @@ try {
     await ev(`[...new Set([...document.fonts].filter(f=>f.status==='loaded').map(f=>f.family))].join(', ')`));
 
   // --- content ---
-  check('5 projects rendered', (await ev(`document.querySelectorAll('#work article').length`)) === 5);
-  check('every project has live + source links',
-    await ev(`[...document.querySelectorAll('#work article')].every(a=>a.querySelector('a[href*="vercel.app"],a[href*="streamlit.app"]')&&a.querySelector('a[href*="github.com"]'))`));
+  check('6 projects rendered', (await ev(`document.querySelectorAll('#work article').length`)) === 6);
+  check('every project has a live link',
+    await ev(`[...document.querySelectorAll('#work article')].every(a=>a.querySelector('a[href*="vercel.app"],a[href*="streamlit.app"],a[href*="itch.io"]'))`));
+  check('5 projects link to source (Rifthold ships without a public repo)',
+    (await ev(`document.querySelectorAll('#work article a[href*="github.com"]').length`)) === 5);
   check('all external links use rel=noopener',
     await ev(`[...document.querySelectorAll('a[target="_blank"]')].every(a=>(a.rel||'').includes('noopener'))`),
     'count=' + await ev(`document.querySelectorAll('a[target="_blank"]').length`));

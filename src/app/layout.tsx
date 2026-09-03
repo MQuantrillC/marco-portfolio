@@ -27,14 +27,14 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: `${person.name} — ${person.role}`,
+  title: `${person.name} · ${person.role}`,
   description,
   authors: [{ name: person.name }],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: person.name,
-    title: `${person.name} — ${person.role}`,
+    title: `${person.name} · ${person.role}`,
     description,
     url: "/",
     locale: "en_US",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${person.name} — ${person.role}`,
+    title: `${person.name} · ${person.role}`,
     description,
     images: ["/images/og-image.jpg"],
   },

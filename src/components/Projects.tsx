@@ -42,16 +42,18 @@ function Row({ p, i }: { p: Project; i: number }) {
             rel="noopener noreferrer"
             className="type-label bg-ink text-paper px-5 py-3.5 hover:bg-accent transition-colors"
           >
-            Open app &#8599;
+            {p.liveLabel ?? "Open app"} &#8599;
           </a>
-          <a
-            href={p.repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="type-label border border-ink px-5 py-3.5 hover:bg-ink hover:text-paper transition-colors"
-          >
-            Source
-          </a>
+          {p.repo && (
+            <a
+              href={p.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="type-label border border-ink px-5 py-3.5 hover:bg-ink hover:text-paper transition-colors"
+            >
+              Source
+            </a>
+          )}
         </div>
       </div>
 

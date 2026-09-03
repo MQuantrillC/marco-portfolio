@@ -64,7 +64,7 @@ export default function Flag({ src }: { src: string }) {
           setHint(false);
           setDone(true);
         }}
-        aria-label={`${flagCopy.hintTitle} — ${flagCopy.hintBody}`}
+        aria-label={`${flagCopy.hintTitle}. ${flagCopy.hintBody}`}
         className="-my-1 flex min-h-11 cursor-pointer items-center py-1
                    transition-transform duration-300 hover:scale-105"
       >
