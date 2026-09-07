@@ -82,9 +82,9 @@ export const projects: Project[] = [
     stack: ["Next.js", "React", "Interactive Charts"],
     live: "https://budget-creator-chi.vercel.app/",
     repo: "https://github.com/MQuantrillC/Budget-Creator",
-    image: "/images/My-Projects-4.webp",
+    image: "/images/My-Projects-8.webp",
     width: 1400,
-    height: 628,
+    height: 601,
   },
   {
     n: "06",
