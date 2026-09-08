@@ -42,9 +42,9 @@ export const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
     live: "https://personal-finance-tracker-kohl-three.vercel.app/",
     repo: "https://github.com/MQuantrillC/personal-finance-tracker",
-    image: "/images/My-Projects-6.webp",
+    image: "/images/My-Projects-9.webp",
     width: 1400,
-    height: 683,
+    height: 692,
   },
   {
     n: "02",
