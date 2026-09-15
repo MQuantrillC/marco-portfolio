@@ -30,6 +30,9 @@ export type Project = {
   live: string;
   // Optional: Rifthold ships as a build, with no public source repo.
   repo?: string;
+  // Optional YouTube id. When set, the screenshot becomes the poster for a
+  // click-to-play demo instead of a link to the live app.
+  video?: string;
   image: string;
   width: number;
   height: number;
@@ -41,6 +44,7 @@ export const projects: Project[] = [
     title: "Personal Finance Tracker",
     stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
     live: "https://personal-finance-tracker-kohl-three.vercel.app/",
+    video: "3LNXC1d6Kng",
     repo: "https://github.com/MQuantrillC/personal-finance-tracker",
     image: "/images/My-Projects-9.webp",
     width: 1400,
@@ -91,6 +95,7 @@ export const projects: Project[] = [
     title: "Rifthold",
     stack: ["Godot 4", "GDScript", "A* Pathfinding", "WebAssembly"],
     live: "https://mquantrillc.itch.io/rifthold",
+    video: "-mGFmaR2u1A",
     image: "/images/My-Projects-7.webp",
     width: 1400,
     height: 788,

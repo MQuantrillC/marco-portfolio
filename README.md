@@ -15,7 +15,7 @@ npm run dev
 
 ## Verify
 
-`.claude/verify.mjs` is a 36-check regression suite that drives real headless
+`.claude/verify.mjs` is a 38-check regression suite that drives real headless
 Chrome over CDP. It needs no npm packages — Node 22's built-in `WebSocket` and
 `fetch` do the work.
 

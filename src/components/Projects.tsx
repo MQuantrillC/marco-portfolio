@@ -1,11 +1,85 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { projects, type Project } from "@/lib/content";
 import type { Dictionary } from "@/lib/i18n/config";
 
 type Copy = Dictionary["projects"];
+
+// The screenshot column. Without a video it links to the live app, as it
+// always has. With one, the screenshot becomes the poster: nothing from
+// YouTube loads until play is pressed, and the player then sits over the image
+// in the same box, so the row never changes height. Same rule as the reel.
+function Media({ p, t, flip }: { p: Project; t: Copy; flip: boolean }) {
+  const [playing, setPlaying] = useState(false);
+
+  const box = `group relative lg:col-span-7 block overflow-hidden bg-ink ${
+    flip ? "lg:order-1 lg:col-start-1" : "lg:order-2"
+  }`;
+
+  const shot = (
+    <Image
+      src={p.image}
+      alt={t.screenshot.replace("{title}", p.title)}
+      width={p.width}
+      height={p.height}
+      sizes="(max-width: 1024px) 100vw, 58vw"
+      // No hover zoom once a video is playing. It would only animate unseen
+      // under the player.
+      className={
+        playing
+          ? "w-full h-auto"
+          : "w-full h-auto transition-transform duration-700 group-hover:scale-[1.03]"
+      }
+    />
+  );
+
+  if (!p.video) {
+    return (
+      <a
+        href={p.live}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={t.openIn.replace("{title}", p.title)}
+        className={box}
+      >
+        {shot}
+      </a>
+    );
+  }
+
+  return (
+    <div className={box}>
+      {shot}
+      {playing ? (
+        // Unmuted on purpose. The click is the user gesture that lets it play
+        // with sound, and for Rifthold the synthesised audio is half the point.
+        <iframe
+          src={`https://www.youtube.com/embed/${p.video}?autoplay=1&playsinline=1&rel=0`}
+          title={t.demo.replace("{title}", p.title)}
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+          className="absolute inset-0 w-full h-full"
+        />
+      ) : (
+        <button
+          type="button"
+          onClick={() => setPlaying(true)}
+          aria-label={t.play.replace("{title}", p.title)}
+          className="absolute inset-0 grid w-full h-full cursor-pointer place-items-center"
+        >
+          <span className="grid place-items-center w-14 h-14 rounded-full bg-paper text-ink transition-colors group-hover:bg-accent group-hover:text-paper">
+            <svg width="16" height="18" viewBox="0 0 16 18" fill="currentColor" aria-hidden>
+              <path d="M16 9 0 18V0z" />
+            </svg>
+          </span>
+        </button>
+      )}
+    </div>
+  );
+}
 
 function Row({ p, i, t }: { p: Project; i: number; t: Copy }) {
   const flip = i % 2 === 1;
@@ -61,25 +135,7 @@ function Row({ p, i, t }: { p: Project; i: number; t: Copy }) {
         </div>
       </div>
 
-      {/* screenshot */}
-      <a
-        href={p.live}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={t.openIn.replace("{title}", p.title)}
-        className={`group lg:col-span-7 block overflow-hidden bg-ink ${
-          flip ? "lg:order-1 lg:col-start-1" : "lg:order-2"
-        }`}
-      >
-        <Image
-          src={p.image}
-          alt={t.screenshot.replace("{title}", p.title)}
-          width={p.width}
-          height={p.height}
-          sizes="(max-width: 1024px) 100vw, 58vw"
-          className="w-full h-auto transition-transform duration-700 group-hover:scale-[1.03]"
-        />
-      </a>
+      <Media p={p} t={t} flip={flip} />
     </motion.article>
   );
 }

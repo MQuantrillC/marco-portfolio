@@ -147,6 +147,17 @@ try {
   check('reel card loads iframe on click',
     (await ev(`document.querySelectorAll('#reel iframe').length`)) === 1);
 
+  // project demos follow the same rule: poster first, player only on click
+  check('2 project demos offer a play button',
+    (await ev(`document.querySelectorAll('#work button[aria-label]').length`)) === 2);
+  const demoBoxBefore = await ev(`Math.round(document.querySelector('#work button[aria-label]').parentElement.getBoundingClientRect().height)`);
+  await ev(`document.querySelector('#work button[aria-label]').click()`);
+  await sleep(1200);
+  const demoAfter = await ev(`(()=>{const f=document.querySelector('#work iframe');if(!f)return null;const a=f.parentElement.getBoundingClientRect(),b=f.getBoundingClientRect();return {box:Math.round(a.height),dw:Math.round(b.width-a.width),dh:Math.round(b.height-a.height)}})()`);
+  check('project demo fills its box and the row keeps its height',
+    !!demoAfter && Math.abs(demoAfter.box - demoBoxBefore) <= 1 && Math.abs(demoAfter.dw) <= 1 && Math.abs(demoAfter.dh) <= 1,
+    JSON.stringify({ before: demoBoxBefore, after: demoAfter }));
+
   check('every local image declares width+height',
     await ev(`[...document.querySelectorAll('img')].filter(i=>!i.src.includes('youtube')).every(i=>i.getAttribute('width')&&i.getAttribute('height'))`));
   check('no broken images',

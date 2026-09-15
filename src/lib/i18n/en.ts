@@ -23,6 +23,8 @@ const en: Dictionary = {
     source: "Source",
     openIn: "Open {title} in a new tab",
     screenshot: "{title} screenshot",
+    play: "Play the {title} demo",
+    demo: "{title} demo",
     items: {
       "01": {
         blurb:

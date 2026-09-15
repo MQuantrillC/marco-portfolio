@@ -25,6 +25,8 @@ const es: Dictionary = {
     source: "Código",
     openIn: "Abrir {title} en una pestaña nueva",
     screenshot: "Captura de {title}",
+    play: "Reproducir la demo de {title}",
+    demo: "Demo de {title}",
     items: {
       "01": {
         blurb:

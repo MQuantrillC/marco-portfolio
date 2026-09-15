@@ -44,6 +44,9 @@ export type Dictionary = {
     // {title} is substituted with the project name.
     openIn: string;
     screenshot: string;
+    // Accessible name of the play button, and the title of the player it loads.
+    play: string;
+    demo: string;
     // Keyed by the project's `n`, so reordering content.ts cannot desync them.
     items: Record<string, { blurb: string; liveLabel?: string }>;
   };
