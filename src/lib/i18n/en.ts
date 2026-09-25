@@ -32,21 +32,25 @@ const en: Dictionary = {
       },
       "02": {
         blurb:
-          "A timestamp-accurate timer for personal projects, with per-session history you can filter by project and period. Postgres-backed accounts keep it in sync across devices.",
+          "Team to-dos written as one line: “@harold review the proposal Friday #sales” arrives assigned, dated and tagged. A board by stage, views by person and by week, import from Excel or plain text with AI help, and an export you can paste into a chat so an AI plans your week. Its own accounts, three languages, and all of it in SQLite on a server you run yourself.",
       },
       "03": {
         blurb:
-          "Puts economies side by side on indicators, demographics, trade and safety metrics, pulled live from official sources so the comparison is never stale.",
+          "A timestamp-accurate timer for personal projects, with per-session history you can filter by project and period. Postgres-backed accounts keep it in sync across devices.",
       },
       "04": {
         blurb:
-          "Modern portfolio theory made interactive. Pulls real-time market data, then builds and stress-tests an optimal allocation you can actually poke at.",
+          "Puts economies side by side on indicators, demographics, trade and safety metrics, pulled live from official sources so the comparison is never stale.",
       },
       "05": {
         blurb:
-          "Personal budgeting across currencies, with live exchange rates, forward projections and charts that make the cash-flow shape obvious at a glance.",
+          "Modern portfolio theory made interactive. Pulls real-time market data, then builds and stress-tests an optimal allocation you can actually poke at.",
       },
       "06": {
+        blurb:
+          "Personal budgeting across currencies, with live exchange rates, forward projections and charts that make the cash-flow shape obvious at a glance.",
+      },
+      "07": {
         blurb:
           "Hold a lone outpost in the deep desert against escalating raider assaults, building walls, towers and collectors between waves, then fighting on the ground yourself as the Commander. Every unit, effect and sound is generated in code: no image files, no audio files, just draw calls and synthesised waveforms.",
         liveLabel: "Play in browser",

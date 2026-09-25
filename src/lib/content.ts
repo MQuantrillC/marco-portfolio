@@ -16,7 +16,7 @@ export const person = {
 };
 
 export const stats = [
-  { value: 6, label: "Shipped projects", suffix: "" },
+  { value: 7, label: "Shipped projects", suffix: "" },
   { value: 2, label: "Languages, fluent", suffix: "" },
   { value: 15.6, label: "GPA / 20, upper fifth", suffix: "", decimals: 1 },
 ];
@@ -52,6 +52,16 @@ export const projects: Project[] = [
   },
   {
     n: "02",
+    title: "Flujo",
+    stack: ["Next.js", "TypeScript", "SQLite", "Docker", "GCP"],
+    live: "https://flujo.35-225-187-165.nip.io/",
+    repo: "https://github.com/MQuantrillC/flujo",
+    image: "/images/My-Projects-10.webp",
+    width: 1400,
+    height: 779,
+  },
+  {
+    n: "03",
     title: "TimeTrack",
     stack: ["Next.js", "React", "TypeScript", "PostgreSQL"],
     live: "https://time-track-eight-lyart.vercel.app/",
@@ -61,7 +71,7 @@ export const projects: Project[] = [
     height: 734,
   },
   {
-    n: "03",
+    n: "04",
     title: "Country Profile Comparator",
     stack: ["Next.js", "React", "REST APIs"],
     live: "https://country-profile-three.vercel.app/",
@@ -71,7 +81,7 @@ export const projects: Project[] = [
     height: 627,
   },
   {
-    n: "04",
+    n: "05",
     title: "Optimal Portfolio Dashboard",
     stack: ["Streamlit", "Python", "Pandas", "Finance APIs"],
     live: "https://mq-portfolio-dashboard.streamlit.app/",
@@ -81,7 +91,7 @@ export const projects: Project[] = [
     height: 631,
   },
   {
-    n: "05",
+    n: "06",
     title: "Budget Creator",
     stack: ["Next.js", "React", "Interactive Charts"],
     live: "https://budget-creator-chi.vercel.app/",
@@ -91,7 +101,7 @@ export const projects: Project[] = [
     height: 601,
   },
   {
-    n: "06",
+    n: "07",
     title: "Rifthold",
     stack: ["Godot 4", "GDScript", "A* Pathfinding", "WebAssembly"],
     live: "https://mquantrillc.itch.io/rifthold",

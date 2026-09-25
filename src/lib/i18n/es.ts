@@ -34,21 +34,25 @@ const es: Dictionary = {
       },
       "02": {
         blurb:
-          "Un cronómetro exacto al segundo para proyectos personales, con historial por sesión que puedes filtrar por proyecto y periodo. Las cuentas en Postgres lo mantienen sincronizado entre dispositivos.",
+          "Pendientes de equipo que se crean en una sola línea: «@harold revisar propuesta viernes #ventas» y ya está asignado, con fecha y etiqueta. Tablero por etapas, vistas por persona y semana, importación desde Excel o texto con ayuda de IA, y exportación lista para pegar en un chat y que la IA te organice la semana. Cuentas propias, tres idiomas, todo en SQLite en un servidor propio.",
       },
       "03": {
         blurb:
-          "Pone economías lado a lado en indicadores, demografía, comercio y métricas de seguridad, traídos en vivo desde fuentes oficiales para que la comparación nunca quede desactualizada.",
+          "Un cronómetro exacto al segundo para proyectos personales, con historial por sesión que puedes filtrar por proyecto y periodo. Las cuentas en Postgres lo mantienen sincronizado entre dispositivos.",
       },
       "04": {
         blurb:
-          "Teoría moderna de portafolios hecha interactiva. Trae datos de mercado en tiempo real, arma una asignación óptima y la somete a estrés para que puedas moverla tú mismo.",
+          "Pone economías lado a lado en indicadores, demografía, comercio y métricas de seguridad, traídos en vivo desde fuentes oficiales para que la comparación nunca quede desactualizada.",
       },
       "05": {
         blurb:
-          "Presupuesto personal en varias monedas, con tipos de cambio en vivo, proyecciones a futuro y gráficos que dejan clara la forma del flujo de caja de un vistazo.",
+          "Teoría moderna de portafolios hecha interactiva. Trae datos de mercado en tiempo real, arma una asignación óptima y la somete a estrés para que puedas moverla tú mismo.",
       },
       "06": {
+        blurb:
+          "Presupuesto personal en varias monedas, con tipos de cambio en vivo, proyecciones a futuro y gráficos que dejan clara la forma del flujo de caja de un vistazo.",
+      },
+      "07": {
         blurb:
           "Defiende un puesto solitario en el desierto profundo contra asaltos de saqueadores cada vez más duros, levantando muros, torres y recolectores entre oleadas, y peleando tú mismo en el suelo como el Comandante. Cada unidad, efecto y sonido se genera en código: sin archivos de imagen, sin archivos de audio, solo llamadas de dibujo y ondas sintetizadas.",
         liveLabel: "Jugar en el navegador",
