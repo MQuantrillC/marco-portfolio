@@ -34,7 +34,7 @@ const es: Dictionary = {
       },
       "02": {
         blurb:
-          "Pendientes de equipo que se crean en una sola línea: «@harold revisar propuesta viernes #ventas» y ya está asignado, con fecha y etiqueta. Tablero por etapas, vistas por persona y semana, importación desde Excel o texto con ayuda de IA, y exportación lista para pegar en un chat y que la IA te organice la semana. Cuentas propias, tres idiomas, todo en SQLite en un servidor propio.",
+          "Pendientes de equipo que se crean en una sola línea: @marco terminar el reporte de ventas para esta semana #ventas, y ya está asignado, con fecha y etiqueta. Tablero por etapas, vistas por persona y semana, importación desde Excel o texto con ayuda de IA, y exportación lista para pegar en un chat y que la IA te organice la semana. Cuentas propias, tres idiomas, todo en SQLite en un servidor propio.",
       },
       "03": {
         blurb:

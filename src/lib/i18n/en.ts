@@ -32,7 +32,7 @@ const en: Dictionary = {
       },
       "02": {
         blurb:
-          "Team to-dos written as one line: “@harold review the proposal Friday #sales” arrives assigned, dated and tagged. A board by stage, views by person and by week, import from Excel or plain text with AI help, and an export you can paste into a chat so an AI plans your week. Its own accounts, three languages, and all of it in SQLite on a server you run yourself.",
+          "Team to-dos written as one line: @marco finish the sales report this week #sales, and it arrives assigned, dated and tagged. A board by stage, views by person and by week, import from Excel or plain text with AI help, and an export you can paste into a chat so an AI plans your week. Its own accounts, three languages, and all of it in SQLite on a server you run yourself.",
       },
       "03": {
         blurb:
