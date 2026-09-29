@@ -55,6 +55,7 @@ export const projects: Project[] = [
     title: "Flujo",
     stack: ["Next.js", "TypeScript", "SQLite", "Docker", "GCP"],
     live: "https://flujo.35-225-187-165.nip.io/",
+    video: "sAQo3nXdhiA",
     repo: "https://github.com/MQuantrillC/flujo",
     image: "/images/My-Projects-10.webp",
     width: 1400,

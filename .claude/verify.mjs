@@ -148,8 +148,8 @@ try {
     (await ev(`document.querySelectorAll('#reel iframe').length`)) === 1);
 
   // project demos follow the same rule: poster first, player only on click
-  check('2 project demos offer a play button',
-    (await ev(`document.querySelectorAll('#work button[aria-label]').length`)) === 2);
+  check('3 project demos offer a play button',
+    (await ev(`document.querySelectorAll('#work button[aria-label]').length`)) === 3);
   const demoBoxBefore = await ev(`Math.round(document.querySelector('#work button[aria-label]').parentElement.getBoundingClientRect().height)`);
   await ev(`document.querySelector('#work button[aria-label]').click()`);
   await sleep(1200);
