@@ -126,6 +126,12 @@ try {
 
   // --- content ---
   check('7 projects rendered', (await ev(`document.querySelectorAll('#work article').length`)) === 7);
+  check('a quoted example in a blurb is italic, quotes kept',
+    await ev(`(()=>{const e=document.querySelector('#work p em');if(!e)return false;const t=e.textContent.trim();return getComputedStyle(e).fontStyle==='italic'&&t.startsWith('"')&&t.endsWith('"')})()`),
+    await ev(`(()=>{const e=document.querySelector('#work p em');return e?e.textContent.trim().slice(0,34):'no em found'})()`));
+  check('Inter italic is a real loaded face, not faux-oblique',
+    await ev(`[...document.fonts].some(f=>f.family==='Inter'&&f.style==='italic'&&f.status==='loaded')`),
+    await ev(`[...document.fonts].filter(f=>f.family==='Inter').map(f=>f.style+':'+f.status).join(', ')`));
   check('every project has a live link',
     await ev(`[...document.querySelectorAll('#work article')].every(a=>a.querySelector('a[href*="vercel.app"],a[href*="streamlit.app"],a[href*="itch.io"],a[href*="nip.io"]'))`));
   check('6 projects link to source (Rifthold ships without a public repo)',

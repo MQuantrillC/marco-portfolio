@@ -8,6 +8,18 @@ import type { Dictionary } from "@/lib/i18n/config";
 
 type Copy = Dictionary["projects"];
 
+// A blurb can quote the product's own input syntax. Whatever sits between a
+// pair of straight double quotes is set in italic, quotes and all, so the
+// example reads as something you would type rather than as more prose. An
+// unbalanced quote leaves the blurb exactly as it was written.
+function withExample(blurb: string) {
+  const parts = blurb.split('"');
+  if (parts.length % 2 === 0) return blurb;
+  return parts.map((part, i) =>
+    i % 2 === 1 ? <em key={i}>&quot;{part}&quot;</em> : part
+  );
+}
+
 // The screenshot column. Without a video it links to the live app, as it
 // always has. With one, the screenshot becomes the poster: nothing from
 // YouTube loads until play is pressed, and the player then sits over the image
@@ -102,7 +114,7 @@ function Row({ p, i, t }: { p: Project; i: number; t: Copy }) {
         <h3 className="type-huge">{p.title}</h3>
 
         <p className="mt-5 max-w-md text-[0.98rem] leading-relaxed text-ink-soft">
-          {item.blurb}
+          {withExample(item.blurb)}
         </p>
 
         <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-2">

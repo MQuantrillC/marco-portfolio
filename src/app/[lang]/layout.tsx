@@ -7,7 +7,9 @@ import { getDictionary } from "@/lib/i18n";
 import "../globals.css";
 
 const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-anton" });
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+// Italic is loaded, not synthesised: the project blurbs set quoted examples
+// in italic, and a faux-oblique Inter is visibly worse than the real one.
+const inter = Inter({ style: ["normal", "italic"], subsets: ["latin"], variable: "--font-inter" });
 const instrument = Instrument_Serif({
   weight: "400",
   style: ["italic", "normal"],
