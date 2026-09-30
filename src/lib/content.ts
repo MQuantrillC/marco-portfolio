@@ -106,7 +106,7 @@ export const projects: Project[] = [
     title: "Rifthold",
     stack: ["Godot 4", "GDScript", "A* Pathfinding", "WebAssembly"],
     live: "https://mquantrillc.itch.io/rifthold",
-    video: "-mGFmaR2u1A",
+    video: "nhzDO4vQo88",
     image: "/images/My-Projects-7.webp",
     width: 1400,
     height: 788,
